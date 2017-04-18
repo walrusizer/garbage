@@ -15,13 +15,22 @@ namespace _10secondclick
         int kps;
         double timeRemaining = 10;
         bool clicked = false;
-        bool over = true;
+        bool over = false;
+        bool reset = false;
+        bool currentlyRunning = false;
+        double avgKps;
         int keys;
         double bpm;
 
         public Form1()
         {
             InitializeComponent();
+        }
+
+        public void text()
+        {
+            keysText.Text = "Keys pressed: " + keys;
+            bpmText.Text = "BPM: " + bpm;
         }
 
         public async Task kpsThing()
@@ -50,30 +59,37 @@ namespace _10secondclick
                 await timeDown();
             }
             over = true;
+            startButton.Text = "Reset";
             timeRemaining = 10;
+            currentlyRunning = false;
             timeDownDisplay.Text = timeRemaining.ToString("0.00");
         }
 
         private void Form1_KeyUp(object sender, KeyEventArgs e)
         {
-            kps++;
-            kpsText.Text = "KPS: " + kps;
-            kpsThing();
-            keys++;
-            if (10 - timeRemaining != 0)
-            {
-                bpm = Math.Round((keys * 15) / (10 - timeRemaining));
-                bpmText.Text = "BPM: " + bpm;
-            }
-            if (over == false)
-            {
-                keysText.Text = "Keys Presed: " + keys;
-            }
             if (clicked)
             {
-                clicked = false;
-                over = false;
+                currentlyRunning = true;
                 timerThing();
+            }
+            if (currentlyRunning)
+            {
+                over = false;
+                clicked = false;
+                
+                kps++;
+                kpsText.Text = "KPS: " + kps;
+                kpsThing();
+                keys++;
+                if (10 - timeRemaining != 0)
+                {
+                    bpm = Math.Round((keys * 15) / (10 - timeRemaining));
+                    bpmText.Text = "BPM: " + bpm;
+                }
+                if (over == false)
+                {
+                    keysText.Text = "Keys Presed: " + keys;
+                }
             }
         }
 
@@ -89,12 +105,20 @@ namespace _10secondclick
 
         private void startButton_Click_1(object sender, EventArgs e)
         {
-            startButton.Text = "Click!";
+            startButton.Text = "Begin!";
+            clicked = true;
             if (over)
             {
-                timeRemaining = 10;
                 clicked = true;
+                startButton.Text = "Reset";
+            }
+            else if (reset)
+            {
                 keys = 0;
+                bpm = 0;
+                avgKps = 0;
+                timeRemaining = 10;
+                text();
             }
         }
     }

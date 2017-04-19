@@ -22,6 +22,7 @@ namespace _10secondclick
         int keys;
         double bpm;
         int maxKPS;
+        int[] scores = new int[10];
 
         public Form1()
         {
@@ -65,6 +66,17 @@ namespace _10secondclick
             timeRemaining = 10;
             currentlyRunning = false;
             timeDownDisplay.Text = timeRemaining.ToString("0.00");
+            for (int i = 0; i < 10; i++)
+            {
+                if (scores[i] == 0 && i != 0)
+                {
+                    scores[i - 1] = keys;
+                }
+                else if (i == 0 && scores[i] == 0)
+                {
+                    scores[0] = keys;
+                }
+            }
         }
 
         private void Form1_KeyUp(object sender, KeyEventArgs e)

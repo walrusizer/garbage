@@ -21,6 +21,7 @@ namespace _10secondclick
         double avgKps;
         int keys;
         double bpm;
+        int maxKPS;
 
         public Form1()
         {
@@ -31,6 +32,7 @@ namespace _10secondclick
         {
             keysText.Text = "Keys pressed: " + keys;
             bpmText.Text = "BPM: " + bpm;
+            mKpsT.Text = "Max KPS: " + maxKPS;
         }
 
         public async Task kpsThing()
@@ -72,11 +74,15 @@ namespace _10secondclick
                 currentlyRunning = true;
                 timerThing();
             }
+            if (kps > maxKPS)
+            {
+                maxKPS = kps;
+                mKpsT.Text = "Max KPS: " + maxKPS;
+            }
             if (currentlyRunning)
             {
                 over = false;
                 clicked = false;
-                
                 kps++;
                 kpsText.Text = "KPS: " + kps;
                 kpsThing();
@@ -86,7 +92,7 @@ namespace _10secondclick
                     bpm = Math.Round((keys * 15) / (10 - timeRemaining));
                     bpmText.Text = "BPM: " + bpm;
                 }
-                if (over == false)
+                if (!over)
                 {
                     keysText.Text = "Keys Presed: " + keys;
                 }
@@ -112,13 +118,16 @@ namespace _10secondclick
                 clicked = true;
                 startButton.Text = "Reset";
             }
-            else if (reset)
+            if (startButton.Text == "Reset")
             {
                 keys = 0;
                 bpm = 0;
                 avgKps = 0;
+                kps = 0;
+                maxKPS = 0;
                 timeRemaining = 10;
                 text();
+                startButton.Text = "Start!";
             }
         }
     }

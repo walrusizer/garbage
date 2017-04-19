@@ -33,6 +33,7 @@
             this.startButton = new System.Windows.Forms.Label();
             this.keysText = new System.Windows.Forms.Label();
             this.bpmText = new System.Windows.Forms.Label();
+            this.mKpsT = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // kpsText
@@ -40,7 +41,7 @@
             this.kpsText.AutoSize = true;
             this.kpsText.Font = new System.Drawing.Font("Arial", 20F);
             this.kpsText.ForeColor = System.Drawing.Color.Lime;
-            this.kpsText.Location = new System.Drawing.Point(347, 36);
+            this.kpsText.Location = new System.Drawing.Point(344, 9);
             this.kpsText.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.kpsText.Name = "kpsText";
             this.kpsText.Size = new System.Drawing.Size(123, 39);
@@ -99,18 +100,31 @@
             this.bpmText.TabIndex = 4;
             this.bpmText.Text = "BPM: 0";
             // 
+            // mKpsT
+            // 
+            this.mKpsT.AutoSize = true;
+            this.mKpsT.Font = new System.Drawing.Font("Arial", 15F);
+            this.mKpsT.ForeColor = System.Drawing.Color.Lime;
+            this.mKpsT.Location = new System.Drawing.Point(335, 48);
+            this.mKpsT.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.mKpsT.Name = "mKpsT";
+            this.mKpsT.Size = new System.Drawing.Size(144, 28);
+            this.mKpsT.TabIndex = 5;
+            this.mKpsT.Text = "Max KPS: 0";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.ClientSize = new System.Drawing.Size(865, 586);
+            this.Controls.Add(this.mKpsT);
             this.Controls.Add(this.bpmText);
             this.Controls.Add(this.keysText);
             this.Controls.Add(this.startButton);
             this.Controls.Add(this.timeDownDisplay);
             this.Controls.Add(this.kpsText);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Form1";
             this.Text = "Form1";
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyUp);
@@ -126,6 +140,7 @@
         private System.Windows.Forms.Label startButton;
         private System.Windows.Forms.Label keysText;
         private System.Windows.Forms.Label bpmText;
+        private System.Windows.Forms.Label mKpsT;
     }
 }
 
